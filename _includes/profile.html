@@ -1,8 +1,26 @@
-<div class="profile">
+<script>
+    let imageUrl = 'https://media-exp1.licdn.com/dms/image/C4E1BAQGzsz3ve6YBZQ/company-background_10000/0/1569596167917?e=1660078800&v=beta&t=3NQgHg0uZ2ofZq0piE90VNdRAAXq3Nni8rnud1VZS-g'
+    
+    async function changeImage() {
+        var profile = document.getElementById("profile");
+        
+        await fetch('https://random.imagecdn.app/v1/image?width=500&height=150&format=image')
+        .then((res) => imageUrl = res.url)
+        .catch((err) => console.log(err))
+
+        profile.style.backgroundImage = `url(${imageUrl})`;
+        return false;
+    }
+</script> 
+
+<div class="profile" id="profile">
+    <button onClick="changeImage();">
+        CLICK TO CHANGE IMAGE
+    </button>
     <div class="profile-picture">
         {% for item in site.data.fellows %}
             <img src="./assets/img/{{ item.img }}">
         {% endfor %}
-    </div>
+        </div>
     <h1>{{ site.title }}</h1>
 </div>
